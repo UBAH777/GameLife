@@ -12,7 +12,7 @@ FetchContent_MakeAvailable(googletest)
 
 
 set(CMAKE_CXX_STANDARD 17)
-add_executable(Life Life.cpp Life.h Game.cpp Game.h tests.cpp)
+add_executable(Life Life.cpp Life.h Game.cpp Game.h lib/DataStorage.h lib/Utils.h tests.cpp)
 target_link_libraries(Life sfml-graphics sfml-window gtest_main)
 
 

@@ -11,6 +11,8 @@ public:
 
     Game(Life &life);
 
+    void Init(Life &life);
+
     Life * Life_ptr;
 
     const size_t cell_size = 10;
@@ -24,5 +26,6 @@ public:
     bool focused;
 
     void RenderLoop();
+
     void DispatchEvent(sf::Event &event);
 };

@@ -5,9 +5,6 @@
 #include <stdexcept>
 
 
-
-
-
 class LifeException : public std::runtime_error{
 public:
     using std::runtime_error::runtime_error;
@@ -43,10 +40,17 @@ public:
 
     int GetHeight() const;
 
+    void SetWidth(int width);
+
+    void SetHeight(int height);
+
 private:
     std::vector<bool> GetNearStates(int x, int y);
     bool IsValid(int x, int y) const;
     int _width;
     int _height;
     std::vector<bool> cell_states;
+
+public:
+    void setCellStates(const std::vector<bool> &cellStates);
 };

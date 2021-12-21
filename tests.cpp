@@ -186,7 +186,7 @@ TEST(Game_tests, GliderMutateTest) {
 
 // TODO: тест нужен для запуска игры, чтобы не менять CMakeLists.txt ради одного запуска
 TEST(Game_tests, run){
-    Life life(20,20);
+    Life life(7,7);
 
     new Game(life);
 }

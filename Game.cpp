@@ -1,9 +1,10 @@
 #include "Game.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "lib/DataStorage.h"
 
-
-Game::Game(Life &life) : Life_ptr(&life) {
+void Game::Init(Life &life) {
+    Life_ptr = &life;
     window_size.x = Life_ptr->GetWidth() * cell_size;
     window_size.y = Life_ptr->GetHeight() * cell_size;
 
@@ -21,6 +22,10 @@ Game::Game(Life &life) : Life_ptr(&life) {
     window.create(sf::VideoMode{(u_int) window_size.x, (u_int) window_size.y}, "Game of Life");
 
     RenderLoop();
+}
+
+Game::Game(Life &life) {
+    Init(life);
 }
 
 
@@ -71,10 +76,38 @@ void Game::DispatchEvent(sf::Event &event) {
         focused = false;
     }
 
-    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R){
+    // Random filling
+    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R) {
         Life_ptr->FillRandomStates();
     }
 
+    // Save game
+    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::S) {
+        DataStorage::saveGame(RawData(
+                Life_ptr->GetHeight(),
+                Life_ptr->GetWidth(),
+                Life_ptr->GetCellStates()
+        ));
+    }
+
+    // Load game
+    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::L) {
+        RawData data = DataStorage::loadGame();
+
+        if (!data.game_saved) {
+            throw LifeException("Nothing to load!");
+        }
+
+        Life_ptr->SetHeight(data.row_count);
+        Life_ptr->SetWidth(data.col_count);
+        Life_ptr->setCellStates(data.store);
+
+        tilemap.clear();
+        window.close();
+        Init(*Life_ptr);
+    }
+
+    // Clear field
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Q) {
         Life_ptr->ClearStates();
     }

@@ -169,3 +169,15 @@ void Life::FillRandomStates() {
         ++i;
     }
 }
+
+void Life::SetWidth(int width) {
+    _width = width;
+}
+
+void Life::SetHeight(int height) {
+    _height = height;
+}
+
+void Life::setCellStates(const std::vector<bool> &_cell_states) {
+    cell_states = _cell_states;
+}
