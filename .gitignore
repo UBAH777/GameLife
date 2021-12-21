@@ -1,0 +1,11 @@
+/cmake-build-debug-coverage
+/cmake-build-debug
+/.idea
+/.clang-format
+/CMakeLists.txt
+/Game.cpp
+/Game.h
+/Life.cpp
+/Life.h
+/life_console.cpp
+/tests.cpp
