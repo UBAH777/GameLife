@@ -3,7 +3,7 @@
 #include <iostream>
 
 
-Game::Game(Life &life) : Life_ptr(&life){
+Game::Game(Life &life) : Life_ptr(&life) {
     window_size.x = Life_ptr->GetWidth() * cell_size;
     window_size.y = Life_ptr->GetHeight() * cell_size;
 
@@ -66,15 +66,19 @@ void Game::DispatchEvent(sf::Event &event) {
     if (event.type == sf::Event::LostFocus) {
         focused = true;
     }
+
     if (event.type == sf::Event::GainedFocus) {
         focused = false;
     }
+
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R){
         Life_ptr->FillRandomStates();
     }
+
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Q) {
         Life_ptr->ClearStates();
     }
+
     if (!focused) {
         if (mouse_world_pos.x >= 0 && mouse_world_pos.y >= 0 && mouse_world_pos.x < window_size.x && mouse_world_pos.y < window_size.y) {
             window.setTitle("Position: x-> " + std::to_string((int)(mouse_world_pos.x / cell_size)) + " y-> " + std::to_string((int)(mouse_world_pos.y / cell_size)));
